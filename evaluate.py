@@ -61,6 +61,7 @@ if __name__ == "__main__":
     base_url = args.base_url
     model_engine = args.model_engine
 
+    print("model:", model_engine)
     if model_engine and model_engine != "all":
         check_reulst = evaluate(api_key, base_url, model_engine)
         print(check_reulst)

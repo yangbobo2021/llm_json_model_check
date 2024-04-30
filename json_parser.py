@@ -39,16 +39,3 @@ def parse_json(content):
                         lines[line_index] = line[:value_start+1] + value_new + line[value_end:]
         content = "\n".join(lines)
     return json.loads(content)
-
-
-data = """
-```json
-{
-"name": "Tom",
-    "age": 18,
-    "address": "Beijing"
-}
-```
-ssssss
-"""
-print(parse_json(data))

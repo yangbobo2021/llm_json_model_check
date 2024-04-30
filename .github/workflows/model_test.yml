@@ -11,7 +11,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  
+
 jobs:
   test-model:
     runs-on: ubuntu-latest
@@ -35,7 +35,9 @@ jobs:
         API_BASE: ${{ secrets.API_BASE }}
       run: |
         TIMESTAMP=$(date +'%Y%m%d%H%M%S')
-        python evaluate.py --api_key $API_KEY --base_url $API_BASE --model_engine ${{ github.event.inputs.model_name }} > results_${TIMESTAMP}.html
+        echo "<pre>\n" > results_${TIMESTAMP}.html
+        python evaluate.py --api_key $API_KEY --base_url $API_BASE --model_engine ${{ github.event.inputs.model_name }} >> results_${TIMESTAMP}.html
+        echo "</pre>" >> results_${TIMESTAMP}.html
         # 确保结果文件被移动到 public 目录中
         mkdir public
         mv results_${TIMESTAMP}.html public/results_${TIMESTAMP}.html

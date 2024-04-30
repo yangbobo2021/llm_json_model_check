@@ -7,8 +7,8 @@ def parse_json(content):
         content = content[3:]
     elif content.find("```") > 0:
         content = content[content.find("```") + 3:]
-        if content.rfind("```") > 0:
-            content = content[:content.rfind("```") + 3]
+    if content.rfind("```") > 0:
+        content = content[:content.rfind("```") + 3]
     content = content.strip()
     if content.startswith("json"):
         content = content[4:]
@@ -39,3 +39,16 @@ def parse_json(content):
                         lines[line_index] = line[:value_start+1] + value_new + line[value_end:]
         content = "\n".join(lines)
     return json.loads(content)
+
+
+data = """
+```json
+{
+"name": "Tom",
+    "age": 18,
+    "address": "Beijing"
+}
+```
+ssssss
+"""
+print(parse_json(data))

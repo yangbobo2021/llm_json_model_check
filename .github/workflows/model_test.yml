@@ -1,4 +1,4 @@
-name: JSON Model Test
+name: JSON Model Test with GitHub Pages
 
 on:
   workflow_dispatch:
@@ -24,9 +24,31 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install openai
-        
-    - name: Run Model Test
+    
+    - name: Run Model Test and Generate HTML Result
       env:
         API_KEY: ${{ secrets.API_KEY }}
         API_BASE: ${{ secrets.API_BASE }}
-      run: python evaluate.py --api_key $API_KEY --base_url $API_BASE --model_engine ${{ github.event.inputs.model_name }}
+      run: |
+        TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+        python evaluate.py --api_key $API_KEY --base_url $API_BASE --model_engine ${{ github.event.inputs.model_name }} > results_${TIMESTAMP}.html
+        # 确保结果文件被移动到 public 目录中
+        mkdir public
+        mv results_${TIMESTAMP}.html public/results_${TIMESTAMP}.html
+
+    - name: Generate Index Page
+      run: |
+        echo "<html><head><title>Test Results</title></head><body><h1>Test Results</h1><ul>" > public/index.html
+        # 注意：现在文件已经在 public 目录中，需要在其中生成索引
+        cd public
+        for file in `ls -1 results_*.html | sort -r`; do
+            # 由于现在已经在 public 目录中，直接使用文件名即可
+            echo "<li><a href='$file'>$file</a></li>" >> index.html
+        done
+        echo "</ul></body></html>" >> index.html
+    
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages # The branch the action should deploy to.
+        folder: public # The folder the action should deploy.

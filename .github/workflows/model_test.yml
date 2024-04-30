@@ -45,7 +45,7 @@ jobs:
         python evaluate.py --api_key $API_KEY --base_url $API_BASE --model_engine ${{ github.event.inputs.model_name }} >> results_${TIMESTAMP}.html
         echo "</pre>" >> results_${TIMESTAMP}.html
         # 确保结果文件被移动到 public 目录中
-        mkdir public
+        mkdir -p public
         mv results_${TIMESTAMP}.html public/results_${TIMESTAMP}.html
 
     - name: Generate Index Page

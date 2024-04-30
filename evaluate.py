@@ -68,7 +68,9 @@ if __name__ == "__main__":
     else:
         model_check_result = {}
         for model_engine in model_list:
+            print("model:", model_engine)
             check_reulst = evaluate(api_key, base_url, model_engine)
+            print("check_reulst:", check_reulst)
             model_check_result[model_engine] = check_reulst
 
         for model in model_check_result:

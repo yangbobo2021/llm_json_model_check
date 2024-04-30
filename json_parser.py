@@ -13,7 +13,7 @@ def parse_json(content):
     content = content.strip()
     if content.endswith("```"):
         content = content[:-3]
-    elif content.find("```"):
+    elif content.find("```") > 0:
         content = content[:content.find("```")]
     content = content.strip()
     content = content.replace("\\_", "_")

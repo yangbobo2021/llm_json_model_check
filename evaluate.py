@@ -33,6 +33,7 @@ def evaluate(api_key, api_base, model_engine):
             result += chunk.choices[0].delta.content
         
         try:
+            print("result:", result)
             result_obj = parse_json(result)
             success = json_task_checkers[index](result_obj)
             check_result[index] = success

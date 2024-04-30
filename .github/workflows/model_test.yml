@@ -6,7 +6,7 @@ on:
       model_name:
         description: 'Model Name'
         required: true
-        default: '*'
+        default: 'all'
 
 permissions:
   contents: write

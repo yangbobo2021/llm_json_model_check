@@ -28,6 +28,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install openai
+      
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v2
+      with:
+        path: 'public' # Check out the repo content into 'public' directory
+        ref: 'gh-pages' # Specify the branch to check out
     
     - name: Run Model Test and Generate HTML Result
       env:

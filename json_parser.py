@@ -94,6 +94,8 @@ def fix_comma(json_block: str):
             # ignore this comma
             json_block = json_block[:index_comma] + json_block[index_comma + 1:]
             current_pos = index_comma + 1
+        else:
+            current_pos = index_comma + 1
     return json_block
 
 def fix_json_error(content: str):

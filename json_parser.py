@@ -1,41 +1,114 @@
 import json
+from typing import List
 
+
+def index_find(value: str, start_pos: int, flag_list: List[str]):
+    for flag in flag_list:
+        index = value.find(flag, start_pos)
+        if index >= 0:
+            return index, flag
+    return -1, ""
+
+
+def locate_json_block(content: str):
+    index_start, flag = index_find(content, 0, ["```json", "``` json", "```"])
+    if index_start < 0:
+        return content
+
+    index_end = content.find("```", index_start + len(flag))
+    if index_end < 0:
+        return content[index_start + len(flag):]
+    return content[index_start + len(flag):index_end]
+
+def fix_unnecessary_slash(json_block: str):
+    # /_ -> _
+    BACKSLASH = {
+        '"': '"', '\\': '\\', '/': '/',
+        'b': '\b', 'f': '\f', 'n': '\n', 'r': '\r', 't': '\t',
+    }
+
+    current_pos = 0
+    while True:
+        index_slash = json_block.find("\\", current_pos)
+        if index_slash < 0:
+            break
+        if json_block[index_slash + 1] not in BACKSLASH:
+            json_block = json_block[:index_slash] + json_block[index_slash + 1:]
+
+        current_pos = index_slash + 1
+    return json_block
+
+
+def next_char(value: str, pos: int):
+    for i in range(pos, len(value)):
+        # whether value[i] is visible character
+        if value[i].isprintable() and not value[i].isspace():
+            return i, value[i]
+    return -1, ""
+
+def before_char(value: str, pos: int):
+    for i in range(pos, -1, -1):
+        # whether value[i] is visible character
+        if value[i].isprintable() and not value[i].isspace():
+            return i, value[i]
+    return -1, ""
+
+def fix_quotes(json_block: str):
+    # "key": "value "a" "b"" -> "key": "value \"a\" \"b\""
+    # valid pairs: ","  ":   "}   "]
+    current_pos = 0
+    while True:
+        index_slash = json_block.find("\"", current_pos)
+        if index_slash < 0:
+            break
+
+        if json_block[index_slash - 1] == "\\":
+            current_pos = index_slash + 1
+            continue
+
+        next_pos, next_c = next_char(json_block, index_slash + 1)
+        if next_pos < 0:
+            break
+        _1, before_c = before_char(json_block, index_slash - 1)
+
+        if next_c in [",", ":", "}", "]"] or before_c in [",", ":", "{", "["]:
+            current_pos = index_slash + 1
+            continue
+        else:
+            json_block = json_block[:index_slash] + "\\" + json_block[index_slash:]
+            current_pos = index_slash + 2
+    return json_block
+
+
+def fix_comma(json_block: str):
+    current_pos = 0
+    while True:
+        index_comma = json_block.find(",", current_pos)
+        if index_comma < 0:
+            break
+
+        next_pos, next_c = next_char(json_block, index_comma + 1)
+        if next_pos < 0:
+            break
+        if next_c in ["}", "]"]:
+            # ignore this comma
+            json_block = json_block[:index_comma] + json_block[index_comma + 1:]
+            current_pos = index_comma + 1
+    return json_block
+
+def fix_json_error(content: str):
+    block = fix_unnecessary_slash(content)
+    block = fix_quotes(block)
+    block = fix_comma(block)
+    return block
 
 def parse_json(content):
-    content = content.strip()
-    if content.startswith("```"):
-        content = content[3:]
-    elif content.find("```") > 0:
-        content = content[content.find("```") + 3:]
-    content = content.strip()
-    if content.startswith("json"):
-        content = content[4:]
-    content = content.strip()
-    if content.endswith("```"):
-        content = content[:-3]
-    elif content.find("```") > 0:
-        content = content[:content.find("```")]
-    content = content.strip()
-    content = content.replace("\\_", "_")
+    json_block = locate_json_block(content)
 
     try:
-        return json.loads(content)
+        return json.loads(json_block, strict=False)
     except Exception:
-        lines = content.split("\n")
-        for line_index, line in enumerate(lines):
-            line = line.strip()
-            if not line.endswith("\""):
-                continue
+        pass
 
-            index_split = line.find(":")
-            if index_split > 0:
-                value_start = line.find("\"", index_split+1)
-                if value_start > 0:
-                    value_end = line.rfind("\"")
-                    if value_end > 0:
-                        value = line[value_start+1:value_end]
-                        value_new = value.replace("\"", "\\\"")
-                        print(value_new)
-                        lines[line_index] = line[:value_start+1] + value_new + line[value_end:]
-        content = "\n".join(lines)
-    return json.loads(content)
+    json_block = fix_json_error(json_block)
+    return json.loads(json_block, strict=False)

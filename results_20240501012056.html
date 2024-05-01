@@ -1,0 +1,280 @@
+<pre>\n
+model: all
+model: togetherai/CODELLAMA/CODELLAMA-13B-INSTRUCT-HF
+result:   ```json
+{
+  "title": "Added print_hello function",
+  "body": "Added a new function called print_hello that prints 'hello' to the console."
+}
+```
+result:   ```json
+{"name": "print_hello_new"}
+```
+check_reulst: [True, True]
+model: togetherai/CODELLAMA/CODELLAMA-34B-INSTRUCT-HF
+result:   ```json
+{
+"title": "Add print_hello function",
+"body": "Added a new function called print_hello that prints the string 'hello' to the console."
+}
+```
+result:   ```json
+{"name": "print_greeting"}
+```
+check_reulst: [True, True]
+model: togetherai/CODELLAMA/CODELLAMA-7B-INSTRUCT-HF
+result:   ```
+{
+"title": "Added print_hello function",
+"body": "Added a new function called print_hello that prints the string 'hello' to the console."
+}
+```
+result:   ```
+{
+    "name": "print_hello_renamed"
+}
+```
+check_reulst: [True, True]
+model: togetherai/META-LLAMA/LLAMA-2-70B-CHAT-HF
+result:   ```json
+{
+  "title": "Added print_hello function",
+  "body": "Created a new function that prints 'hello' to the console."
+}
+```
+result:   ```json
+{
+    "name": "greet"
+}
+```
+
+I have renamed the function to "greet"
+check_reulst: [True, True]
+model: togetherai/META-LLAMA/LLAMA-3-70B-CHAT-HF
+result: ```
+{
+  "title": "Added print_hello function",
+  "body": "Created a new function print_hello that prints 'hello' to the console."
+}
+```
+result: ```
+{
+    "name": "greet_user"
+}
+```
+check_reulst: [True, True]
+model: togetherai/META-LLAMA/LLAMA-3-8B-CHAT-HF
+result: ```json
+{
+  "title": "Added print_hello function",
+  "body": "Implemented a new function print_hello that prints 'hello' to the console"
+}
+result: ```json
+{"name": "greet_user"}
+check_reulst: [True, True]
+model: togetherai/MISTRALAI/MISTRAL-7B-INSTRUCT-V0.2
+result:  ``` json
+{
+  "title": "Added new function 'print\_hello()'",
+  "body": "This function simply prints the string 'hello' when called."
+}
+```
+result:  ``` json
+{
+  "name": "new_print_hello"
+}
+```
+
+This JSON object represents the new name for the function. You can use it to rename the function in your code by updating the function definition with the new name. For example:
+
+``` python
+def new_print_hello():
+    print("hello")
+```
+new_print_hello
+parse_json error: Extra data: line 4 column 1 (char 30)
+check_reulst: [True, False]
+model: togetherai/MISTRALAI/MIXTRAL-8X22B-INSTRUCT-V0.1
+result:  ``` json
+{
+  "title": "Added print_hello function",
+  "body": "This commit adds a new function called print_hello that prints the string 'hello'."
+}
+```
+result:  ``` json
+{
+  "name": "print_greeting"
+}
+```
+check_reulst: [True, True]
+model: togetherai/MISTRALAI/MIXTRAL-8X7B-INSTRUCT-V0.1
+result:  ```json
+{
+  "title": "Add function to print 'hello'",
+  "body": "A new function `print_hello()` has been added to print the string 'hello' to the console. This function does not take any arguments and does not return any value."
+}
+```
+result:  {
+"name": "say\_hello"
+}
+check_reulst: [True, True]
+model: togetherai/MICROSOFT/WIZARDLM-2-8X22B
+result:  ``` json
+{
+  "title": "Add print_hello function",
+  "body": "This commit introduces a new function `print_hello` that prints the string 'hello' to the console when called.\n\nThe function is simple and serves as a starting point for further development or as an example for demonstrating basic Python function syntax."
+}
+  ```
+result:  ``` json
+{
+  "name": "greet_user"
+}
+  ```
+check_reulst: [True, True]
+model: togetherai/DEEPSEEK-AI/DEEPSEEK-CODER-33B-INSTRUCT
+result: 
+``` json
+{
+    "title": "Add print_hello function",
+    "body": "Added a new function print_hello that prints 'hello' to the console."
+}
+```
+
+result: 
+``` json
+{
+    "name": "print_hello"
+}
+```
+
+check_reulst: [True, True]
+model: togetherai/DEEPSEEK-AI/DEEPSEEK-LLM-67B-CHAT
+result: ``` json
+{
+    "title": "Add print_hello function",
+    "body": "Added a new function print_hello that prints 'hello' to the console."
+}
+```
+result: ``` json
+{
+    "name": "print_hello_renamed"
+}
+```
+check_reulst: [True, True]
+model: togetherai/NOUSRESEARCH/NOUS-CAPYBARA-7B-V1P9
+result: ```json
+{
+  "title": "Add print_hello function",
+  "body": "Implemented a new function to print 'hello'."
+}
+```
+result: ```json
+{"name": "greetings"}
+```
+check_reulst: [True, True]
+model: togetherai/NOUSRESEARCH/NOUS-HERMES-2-MISTRAL-7B-DPO
+result: ```json
+{
+    "title": "Added print_hello() function",
+    "body": "Implemented a new function that prints 'hello'."
+}
+```
+result: {
+  "name": "print_greeting"
+}
+check_reulst: [True, True]
+model: togetherai/NOUSRESEARCH/NOUS-HERMES-2-MIXTRAL-8X7B-SFT
+result: ``` json
+{
+  "title": "Added print_hello function",
+  "body": "Added a new function print_hello that prints 'hello'."
+}
+```
+result: ``` json
+{
+  "name": "print_hello_renamed"
+}
+```
+check_reulst: [True, True]
+model: togetherai/NOUSRESEARCH/NOUS-HERMES-2-YI-34B
+result: ``` json
+{
+  "title": "Add print_hello function",
+  "body": "This commit adds a new function called print_hello() which prints 'hello' to the console."
+}
+```
+result: ``` json
+{"name": "print_greetings"}
+```
+check_reulst: [True, True]
+model: togetherai/COGNITIVECOMPUTATIONS/DOLPHIN-2.5-MIXTRAL-8X7B
+result:  ``` json
+{
+  "title": "Added print_hello function",
+  "body": "Added a new function print_hello that prints 'hello' to the console."
+}
+```
+result:  ``` json
+{
+  "name": "greet_user"
+}
+```
+check_reulst: [True, True]
+model: togetherai/QWEN/QWEN1.5-32B-CHAT
+result: ``` json
+{
+  "title": "Add print_hello function",
+  "body": "Added a new function `print_hello()` which prints \"hello\" to the console."
+}
+```
+result: ``` json
+{"name": "say_hello"}
+```
+check_reulst: [True, True]
+model: togetherai/QWEN/QWEN1.5-72B-CHAT
+result: ```json
+{
+  "title": "Add print_hello function",
+  "body": "This commit introduces a new function `print_hello()` which prints the string 'hello' to the console."
+}
+```
+result: ``` json
+{
+  "name": "greet_world"
+}
+```
+check_reulst: [True, True]
+model: togetherai/ZERO-ONE-AI/YI-34B-CHAT
+result: ```json
+{
+  "title": "Add print_hello function",
+  "body": "This commit adds a new function named `print_hello` which prints 'hello' to the console."
+}
+```
+result: ```json
+{
+  "name": "print_hello_renamed"
+}
+```
+check_reulst: [True, True]
+togetherai/CODELLAMA/CODELLAMA-13B-INSTRUCT-HF [True, True]
+togetherai/CODELLAMA/CODELLAMA-34B-INSTRUCT-HF [True, True]
+togetherai/CODELLAMA/CODELLAMA-7B-INSTRUCT-HF [True, True]
+togetherai/META-LLAMA/LLAMA-2-70B-CHAT-HF [True, True]
+togetherai/META-LLAMA/LLAMA-3-70B-CHAT-HF [True, True]
+togetherai/META-LLAMA/LLAMA-3-8B-CHAT-HF [True, True]
+togetherai/MISTRALAI/MISTRAL-7B-INSTRUCT-V0.2 [True, False]
+togetherai/MISTRALAI/MIXTRAL-8X22B-INSTRUCT-V0.1 [True, True]
+togetherai/MISTRALAI/MIXTRAL-8X7B-INSTRUCT-V0.1 [True, True]
+togetherai/MICROSOFT/WIZARDLM-2-8X22B [True, True]
+togetherai/DEEPSEEK-AI/DEEPSEEK-CODER-33B-INSTRUCT [True, True]
+togetherai/DEEPSEEK-AI/DEEPSEEK-LLM-67B-CHAT [True, True]
+togetherai/NOUSRESEARCH/NOUS-CAPYBARA-7B-V1P9 [True, True]
+togetherai/NOUSRESEARCH/NOUS-HERMES-2-MISTRAL-7B-DPO [True, True]
+togetherai/NOUSRESEARCH/NOUS-HERMES-2-MIXTRAL-8X7B-SFT [True, True]
+togetherai/NOUSRESEARCH/NOUS-HERMES-2-YI-34B [True, True]
+togetherai/COGNITIVECOMPUTATIONS/DOLPHIN-2.5-MIXTRAL-8X7B [True, True]
+togetherai/QWEN/QWEN1.5-32B-CHAT [True, True]
+togetherai/QWEN/QWEN1.5-72B-CHAT [True, True]
+togetherai/ZERO-ONE-AI/YI-34B-CHAT [True, True]
+</pre>

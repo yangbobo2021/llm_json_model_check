@@ -19,5 +19,14 @@ model_list = [
     "togetherai/COGNITIVECOMPUTATIONS/DOLPHIN-2.5-MIXTRAL-8X7B",
     "togetherai/QWEN/QWEN1.5-32B-CHAT",
     "togetherai/QWEN/QWEN1.5-72B-CHAT",
-    "togetherai/ZERO-ONE-AI/YI-34B-CHAT"
+    "togetherai/ZERO-ONE-AI/YI-34B-CHAT",
+    'claude-3-opus',
+    'claude-3-sonnet',
+    'ERNIE-Bot-4.0',
+    'GLM-4',
+    'gpt-3.5-turbo',
+    'gpt-4-turbo-preview',
+    'gpt-4',
+    'minimax/abab6-chat',
+    'xinghuo-3.5',
 ]

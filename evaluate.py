@@ -1,3 +1,4 @@
+import json
 import sys
 import os
 import openai
@@ -5,9 +6,7 @@ import openai
 # append current path to sys.path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from json_parser import parse_json
 from models import model_list
-from fix_prompt import fix_prompt_for_json
 from tasks import json_tasks, json_task_checkers
 
 
@@ -15,7 +14,6 @@ def evaluate(api_key, api_base, model_engine):
     check_result = [False]*len(json_tasks)
     for index,task in enumerate(json_tasks):
         messages = task()
-        messages = fix_prompt_for_json(messages)
 
         client = openai.OpenAI(
             api_key = api_key,
@@ -25,7 +23,8 @@ def evaluate(api_key, api_base, model_engine):
         response = client.chat.completions.create(**{
             "model": model_engine,
             "messages": messages,
-            "stream": True
+            "stream": True,
+            "response_format": {"type": "json_object"},
         })
 
         result = ""
@@ -34,7 +33,7 @@ def evaluate(api_key, api_base, model_engine):
         
         try:
             print("result:", result)
-            result_obj = parse_json(result)
+            result_obj = json.loads(result)
             success = json_task_checkers[index](result_obj)
             check_result[index] = success
         except Exception as e:

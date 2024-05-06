@@ -6,7 +6,7 @@ Here is my new function:
 def print_hello():
     print("hello")
 ```
-base my chanages, generate a commit message, format as {"title": "<title>", "body": "<body>"}
+base my chanages, generate a commit message, format as JSON: {"title": "<title>", "body": "<body>"}
 """
 
 def task_messages():

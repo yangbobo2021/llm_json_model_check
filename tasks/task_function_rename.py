@@ -6,7 +6,7 @@ Here is my new function:
 def print_hello():
     print("hello")
 ```
-rename the function, generate new function name, format as {"name": "<name>"}
+rename the function, generate new function name, format as JSON: {"name": "<name>"}
 """
 
 def task_messages():

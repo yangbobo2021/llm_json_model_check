@@ -28,8 +28,16 @@ def evaluate(api_key, api_base, model_engine):
         })
 
         result = ""
-        for chunk in response:
-            result += chunk.choices[0].delta.content
+        try:
+            for chunk in response:
+                result += chunk.choices[0].delta.content
+        except openai.APIError as error:
+            print("openai error:", error)
+            print(error.type)
+            break
+        except Exception as e:
+            print("exception:",e)
+            break
         
         try:
             print("result:", result)

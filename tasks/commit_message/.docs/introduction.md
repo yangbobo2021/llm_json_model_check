@@ -1,0 +1,1 @@
+json mode for commit message.
